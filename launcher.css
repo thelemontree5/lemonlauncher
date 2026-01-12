@@ -1,0 +1,161 @@
+:root {
+    --bg-gif: url('./its all on fire.gif');
+    --dock-bg: red;
+    --text-color: white;
+    --main-color: red;
+    --accent-color: darkred;
+    --font-family: "Comic Sans MS", sans-serif;
+    --strong: red;
+    --p: orange;
+    --grid-cols: 3;
+}
+
+body.light-mode {
+    --bg-gif: url('./Other Assets/holy cow.jpg'); 
+    --dock-bg: #87CEEB; 
+    --text-color: black;
+    --main-color: #87CEEB;
+    --accent-color: white;
+    --font-family: "Charm", cursive; 
+    --strong: #0056b3;
+    --p: #444;
+}
+
+body {
+    background-image: var(--bg-gif);
+    background-attachment: fixed;
+    background-position: center;
+    background-size: cover;
+    color: var(--text-color);
+    font-family: var(--font-family);
+    margin: 0; padding: 0;
+    min-height: 100vh;
+    display: flex; flex-direction: column;
+}
+
+.content-wrap { padding: 20px; flex: 1; padding-bottom: 200px; }
+
+ul { 
+    list-style: none; 
+    padding: 0; 
+    display: flex; 
+    flex-wrap: wrap; 
+    justify-content: center; 
+    gap: 15px 30px; 
+}
+
+.game-card { 
+    position: relative; 
+    width: 419px; 
+    height: 192px; 
+    z-index: 1; 
+    transition: transform 0.3s; 
+}
+
+.game-card img { 
+    display: block; 
+    width: 100%; 
+    height: 100%; 
+    border-radius: 8px; 
+    border: 7.5px solid var(--accent-color); 
+}
+
+.description {
+    position: absolute; 
+    top: 95%; 
+    left: 0; 
+    width: 103.2%; 
+    background: rgba(25, 25, 25, 0.98);
+    padding: 15px; 
+    border-radius: 0 0 8px 8px; 
+    border: 6px solid var(--accent-color); 
+    border-top: none;
+    z-index: 20; 
+    opacity: 0; 
+    visibility: hidden; 
+    transform: translateY(-10px);
+    transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s;
+    box-sizing: border-box; 
+}
+
+.description strong { color: var(--strong); display: block; margin-bottom: 5px; font-size: 18px; }
+.description p { margin: 0; font-size: 14px; color: var(--p); }
+
+.game-card:hover { transform: translateY(-5px); z-index: 10; }
+body:not(.no-hover) 
+.game-card:hover .description { opacity: 1; visibility: visible; transform: translateY(0); transition-delay: 0.5s; }
+
+.game-card.hidden { 
+    display: none !important; 
+}
+
+.search-dock {
+    position: fixed;
+    bottom: 0; left: 0; width: 100%;
+    background: var(--dock-bg);
+    color: var(--text-color);
+    padding: 15px;
+    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: 100;
+    display: flex; flex-direction: column; align-items: center; gap: 10px;
+}
+
+.search-dock.minimized { transform: translateY(100%); }
+
+.dock-tab {
+    position: absolute;
+    top: -30px; left: 50%; transform: translateX(-50%);
+    background: var(--dock-bg);
+    color: var(--text-color);
+    padding: 5px 25px;
+    border-radius: 15px 15px 0 0;
+    cursor: pointer;
+    font-weight: bold; font-size: 18px;
+    box-shadow: 0 -5px 10px rgba(0,0,0,0.2);
+    visibility: visible !important; opacity: 1 !important;
+}
+
+.dock-controls { display: flex; width: 100%; max-width: 600px; gap: 10px; align-items: center; position: relative; }
+
+#gameSearch {
+    flex: 1; padding: 14px 30px; border-radius: 40px; border: 2px solid #333;
+    font-size: 16px; outline: none; background: white; color: black;
+}
+
+.toggle-btn {
+    min-width: 40px; height: 40px; background: #333; color: white;
+    border: none; border-radius: 50%; cursor: pointer;
+}
+
+.settings-modal {
+    display: none;
+    position: fixed;    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);    background: #222;
+    padding: 20px;
+    border-radius: 15px;
+    border: 3px solid var(--accent-color);
+    z-index: 300;
+    width: 280px;
+    color: white;
+    box-shadow: 0 0 20px rgba(0,0,0,0.8);
+}
+
+.setting-item { display: flex; justify-content: space-between; margin-bottom: 15px; align-items: center; }
+
+.filter-bubble {
+    display: none; position: absolute; bottom: 60px; left: 0;
+    background: white; color: black; padding: 10px; border-radius: 10px;
+    width: 180px; box-shadow: 0 5px 15px rgba(0,0,0,0.5); z-index: 200;
+}
+.filter-bubble.show { display: block; }
+
+.minimized .dock-controls, .minimized .nav-buttons, .minimized .dock-label {
+    opacity: 0; visibility: hidden; pointer-events: none;
+}
+
+.nav-buttons { display: flex; gap: 10px; margin-top: 5px; }
+.page-btn {
+    background: #333; color: white; padding: 8px 16px; 
+    text-decoration: none; border-radius: 40px; border: 1px solid #444;
+}

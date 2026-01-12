@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Lemon's Evil Game Launcher</title>
+    <link rel="icon" href="./favicon.png" type="image/png">
+    <style>
+     body {
+           /* 1. RESET DEFAULT BROWSER SPACING */
+        * {
+            box-sizing: border-box;
+        }
+
+            /* GIF Background setup */
+            background-image: url('./its all on fire.gif'); 
+            background-attachment: fixed;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+                 
+            font-family: 'Comic Sans MS';
+            color: white;
+            
+            /* Remove margins so elements can touch the edges */
+            margin: 0;
+            padding: 0; 
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* 2. MAIN CONTENT WRAPPER */
+        /* Adds the padding back to the games area without affecting the footer */
+        .content-wrap {
+            padding: 20px;
+            flex: 1; /* Pushes the footer to the bottom of the page */
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 15px 30px;
+        }
+
+        /* Game Card Styles */
+        .game-card {
+            position: relative;
+            width: 419px;
+            height: 192px;
+            z-index: 1;
+            transition: transform 0.3s ease;
+        }
+
+        .game-card img {
+            display: block;
+            width: 100%;
+            height: 100%;
+            border-radius: 8px;
+            border: 7.5px solid darkred;
+        }
+
+        .description {
+            position: absolute;
+            top: 95%;
+            left: 0%;
+            width: 100%;
+            background: rgba(25, 25, 25, 0.98);
+            padding: 15px;
+            border-radius: 0 0 8px 8px;
+            border: 6px solid darkred;
+            border-top: none;
+            z-index: 20;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-10px);
+            transition: opacity 0.3s ease, transform 0.2s ease, visibility 0.2s;
+        }
+
+        .game-card:hover { transform: translateY(-5px); z-index: 10; }
+        .game-card:hover .description {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+            transition-delay: 0.5s; 
+        }
+
+        /* 3. FULL-WIDTH FOOTER FIX */
+        footer {
+            background-color: red;
+            text-align: center;
+            padding: 40px 0; /* Vertical padding only */
+            margin-top: 100px;
+            width: 100%; /* Spans the full screen width */
+            /* Removed border-radius to ensure it sits flush against sides */
+            position: relative;
+            z-index: 5;
+        }
+
+        footer img {
+            max-width: 600px;
+            Width: 80%;
+            height: auto;
+        }
+
+        a { text-decoration: none; }
+        .description strong { color: red; display: block; margin-bottom: 5px; font-size: 18px; }
+        .description p { margin: 0; font-size: 14px; color: orange; }
+    </style>
+</head>
+<body>
+    <center>
+        <h1>
+            <img src="./title.gif" alt="launch a game fr">
+        </h1>
+    </center>
+
+    <ul>
+        <!-- 1. Baldi's Basics Plus -->
+        <li class="game-card">
+            <a href="./Baldi's Basics Plus (Source Code)/index.html">
+                <img src="./Baldi's Basics Plus (Source Code)/preview.jpg">
+            </a>
+            <div class="description">
+                <strong>Baldi's Basics Plus</strong>
+                <p>Baldi's Basics® Plus is an active stealth roguelike that parodies cheap '90s edutainment with a subtle horror twist! Play Hide & Seek with Baldi as he chases you through procedurally generated levels while using your surroundings, items, and game knowledge to shift chaos in your favor.</p>
+            </div>
+        </li>
+
+        <!-- 2. Baldi's Basics Classic Remastered -->
+        <li class="game-card">
+            <a href="./Baldi's Basics Classic Remastered (Source Code)/index.html">
+                <img src="./Baldi's Basics Classic Remastered (Source Code)/preview.jpg">
+            </a>
+            <div class="description">
+                <strong>Baldi's Basics Classic Remastered</strong>
+                <p>Escape Baldi's schoolhouse again in this new remastered version of Baldi's Basics Classic! Use stealth and strategy to collect all 7 notebooks and win! Featuring three games in one, gameplay improvements, a more authentic art style, accessibility improvements, and brand new ways to play!</p>
+            </div>
+        </li>
+
+        <!-- 3. Undertale -->
+        <li class="game-card">
+            <a href="./Undertale (Source Code)/undertale-web-port-main/index.html">
+                <img src="./Undertale (Source Code)/undertale-web-port-main/preview.jpg">
+            </a>
+            <div class="description">
+                <strong>Undertale</strong>
+                <p>Undertale is a 2015 role-playing video game created by American indie developer Toby Fox. The player controls a child who has fallen into the Underground: a large, secluded region under the surface of the Earth, separated by a magical barrier.</p>
+            </div>
+        </li>
+        
+        <!-- ... (All other 15 games follow the same format) ... -->
+
+        <!-- 4. Undertale Yellow -->
+        <li class="game-card">
+            <a href="./Undertale Yellow (Source Code)/index.html">
+                <img src="./Undertale Yellow (Source Code)/preview.jpeg">
+            </a>
+            <div class="description">
+                <strong>Undertale Yellow</strong>
+                <p>Undertale Yellow is a fan-made prequel to Undertale, where you control Clover, the sixth SOUL to be collected by Asgore and the seventh human to fall into the Underground. Clover represents the Yellow (Justice) SOUL from Undertale, and they set out to find the five humans who went missing on Mt. Ebott.</p>
+            </div>
+        </li>
+        <!-- 5. Deltarune -->
+        <li class="game-card">
+            <a href="./Deltarune (Source Code)/index.html">
+                <img src="./Deltarune (Source Code)/preview.jpg">
+            </a>
+            <div class="description">
+                <strong>Deltarune</strong>
+                <p>Deltarune is an episodic role-playing video game by American indie developer Toby Fox. Set in a parallel universe to his 2015 game, Undertale, the game follows Kris, a human teenager predetermined to save the world alongside Susie, a monster, and Ralsei, a prince from the Dark World.</p>
+            </div>
+        </li>
+
+        <!-- 6. Getting Over It -->
+        <li class="game-card">
+            <a href="./Getting Over It (Source Code)/index.html">
+                <img src="./Getting Over It (Source Code)/preview.jpeg">
+            </a>
+            <div class="description">
+                <strong>Getting Over It</strong>
+                <p>Getting Over It with Bennett Foddy is a platform game developed by the titular Bennett Foddy. The game was released as part of the October 2017 Humble Monthly, on October 6, 2017, where it went on to be played by over 2.7 million players.</p>
+            </div>
+        </li>
+
+        <!-- 7. World's Hardest Game -->
+        <li class="game-card">
+            <a href="./World's Hardest Game (Source Code)/index.html">
+                <img src="./World's Hardest Game (Source Code)/preview.jpeg">
+            </a>
+            <div class="description">
+                <strong>World's Hardest Game</strong>
+                <p>The World's Hardest Game is a 2007 maze Flash game developed by Stephen Critoph, also known as Snubby Land. In it, players control a red square and must get from one end of a maze to another while avoiding obstacles and collecting coins. It was also released for iOS in 2009.</p>
+            </div>
+        </li>
+
+        <!-- 8. WHG 2 -->
+        <li class="game-card">
+            <a href="./WHG 2 (Source Code)/index.html">
+                <img src="./WHG 2 (Source Code)/preview.jpeg">
+            </a>
+            <div class="description">
+                <strong>World's Hardest Game 2</strong>
+                <p>The World's Hardest Game 2 is a puzzle video game developed by Stephen Critoph and released in 2008 for browsers. It was later ported to iOS and Android
+. It is the sequel to The World's Hardest Game and the second installment in the series.</p>
+            </div>
+        </li>
+
+        <!-- 9. Bendy & The Ink Machine -->
+        <li class="game-card">
+            <a href="./Bendy & The Ink Machine (Source Code)/index.html">
+                <img src="./Bendy & The Ink Machine (Source Code)/preview.avif">
+            </a>
+            <div class="description">
+                <strong>Bendy & The Ink Machine</strong>
+                <p>Bendy and the Ink Machine is an episodic survival horror game developed and published by Joey Drew Studios. It was initially released to Game Jolt on February 10, 2017, as the first of five chapters, with a full worldwide release on October 27, 2018.</p>
+            </div>
+        </li>
+
+        <!-- 10. Pizza Tower -->
+        <li class="game-card">
+            <a href="./Pizza Tower (Source Code)/index.html">
+                <img src="./Pizza Tower (Source Code)/preview.jpg">
+            </a>
+            <div class="description">
+                <strong>Pizza Tower</strong>
+                <p>Pizza Tower is a 2023 platform game created by the indie developer Tour De Pizza. It follows the pizza chef Peppino Spaghetti, who must scale a tower to prevent the destruction of his pizzeria.</p>
+            </div>
+        </li>
+
+        <!-- 11. ULTRAKILL Prelude -->
+        <li class="game-card">
+            <a href="./ULTRAKILL Prelude (Source Code)/index.html">
+                <img src="./ULTRAKILL Prelude (Source Code)/preview.jpeg">
+            </a>
+            <div class="description">
+                <strong>ULTRAKILL (Prelude)</strong>
+                <p>Ultrakill is an upcoming first-person shooter game developed by Arsi "Hakita" Patala and published by New Blood Interactive. It was released on Steam through early access for Microsoft Windows on 3 September 2020.</p>
+            </div>
+        </li>
+
+        <!-- 12. Cookie Clicker -->
+        <li class="game-card">
+            <a href="./Cookie Clicker (Source Code)/index.html">
+                <img src="./Cookie Clicker (Source Code)/preview.jpg">
+            </a>
+            <div class="description">
+                <strong>Cookie Clicker</strong>
+                <p>Cookie Clicker is a 2013 incremental game created by French programmer Julien "Orteil" Thiennot. The user initially clicks on a big cookie on the screen, earning a single cookie per click.</p>
+            </div>
+        </li>
+
+        <!-- 13. Buckshot Roulette -->
+        <li class="game-card">
+            <a href="./Buckshot Roulette (Source Code)/index.html">
+                <img src="./Buckshot Roulette (Source Code)/preview.jpg">
+            </a>
+            <div class="description">
+                <strong>Buckshot Roulette</strong>
+                <p>Buckshot Roulette is a 2023 indie tabletop horror video game developed and published by Estonian video game developer Mike Klubnika on itch.io. It was released on Steam by Critical Reflex on 4 April 2024 to coincide with a new update.</p>
+            </div>
+        </li>
+
+        <!-- 14. Milkman Karlson -->
+        <li class="game-card">
+            <a href="./Milkman Karlson (Source Code)/index.html">
+                <img src="./Milkman Karlson (Source Code)/preview.jpg">
+            </a>
+            <div class="description">
+                <strong>Milkman Karlson</strong>
+                <p>Milkman Karlson takes place outside of Karlson’s events, instead placing the player, assumably named Karlson, in a physics-based game with guns. Karlson must get to the store and buy milk. Along his way, he needs to use his guns and rifle to shoot at enemies that try to get in his path. He can collect milk to heal himself and can slow down time to get better accuracy when attacking.</p>
+            </div>
+        </li>
+
+        <!-- 15. Eaglercraft 1.12.2 -->
+        <li class="game-card">
+            <a href="./Eaglercraft 1.12.2 (WASM)/index.html">
+                <img src="./Eaglercraft 1.12.2 (WASM)/preview.jpg">
+            </a>
+            <div class="description">
+                <strong>Eaglercraft 1.12.2</strong>
+                <p>Eaglercraft 1.12.2 is a browser-based version of Minecraft Java Edition that lets you play directly in a web browser, no download needed, ideal for school Chromebooks or restricted devices, offering classic gameplay with multiplayer support and offline play, transforming locked-down PCs into Minecraft portals with features like custom textures and server connectivity for a fun, accessible Minecraft experience.</p>
+            </div>
+        </li>
+
+        <!-- 16. EaglercraftX 1.8.8 -->
+        <li class="game-card">
+            <a href="./EaglercraftX 1.8.8/index.html">
+                <img src="./EaglercraftX 1.8.8/preview.jpg">
+            </a>
+            <div class="description">
+                <strong>EaglercraftX 1.8.8</strong>
+                <p>EaglercraftX 1.8.8 is a browser-based port of Minecraft Java Edition 1.8.8, allowing you to play a classic version of Minecraft directly in a web browser without downloads, featuring single-player worlds saved locally and multiplayer support via special server plugins (EaglerX-compatible servers). It compiles Java code to JavaScript, using TeaVM and custom APIs, and supports resource packs, skins, and various game modes, though it relies on webSockets for multiplayer rather than direct TCP connections.</p>
+            </div>
+        </li>
+
+        <!-- 17. Sandboxels -->
+        <li class="game-card">
+            <a href="./Sandboxels (Source Code)/index.html">
+                <img src="./Sandboxels (Source Code)/preview.jpeg">
+            </a>
+            <div class="description">
+                <strong>Sandboxels</strong>
+                <p>Sandboxels is a free, browser-based "falling-sand" simulation game where players experiment with over 500 interactive elements, creating complex systems involving heat, electricity, chemistry, fire, and life to observe emergent behaviors like cooking, growing ecosystems, or just chaotic fun, offering a pixelated playground for scientific curiosity and relaxation.</p>
+            </div>
+        </li>
+
+ <li class="game-card">
+            <a href="./Super Mario 64 (Source Code)/sm64-main/index.html">
+                <img src="./Super Mario 64 (Source Code)/sm64-main/preview.png">
+            </a>
+            <div class="description">
+                <strong>Super Mario 64</strong>
+                <p>Super Mario 64 is a 1996 platform game developed and published by Nintendo for the Nintendo 64. It is the first Super Mario game to feature 3D gameplay, combining traditional Super Mario gameplay, visual style, and characters in a large open world.</p>
+            </div>
+        </li>
+
+<li class="game-card">
+            <a href="./Super Mario Bros. 1 (Source Code)/mario-main/index.html">
+                <img src="./Super Mario Bros. 1 (Source Code)/mario-main/preview.png">
+            </a>
+            <div class="description">
+                <strong>Super Mario Bros. 1</strong>
+                <p>Super Mario Bros. is a platform game in which the player controls the titular protagonist Mario, who is tasked with exploring the Mushroom Kingdom to defeat Bowser and rescue Princess Toadstool. His brother, Luigi, is controlled by the second player in multiplayer mode and assumes the same plot role and functionality as Mario.  The game takes place through a side-scrolling perspective where the player moves to the right to reach the flagpole at the end of each level.</p>
+            </div>
+        </li>
+
+<li class="game-card">
+            <a href="./N-GON (Source Code)/n-gon-master/index.html">
+                <img src="./N-GON (Source Code)/n-gon-master/preview.jpg">
+            </a>
+            <div class="description">
+                <strong>n-gon</strong>
+                <p>n-gon is a popular, physics-based 2D roguelite platformer game by Ross Landgreen, known for its sci-fi shooter elements, procedural generation (roguelite), and focus on fluid movement using the matter.js physics engine in your browser, featuring various guns and upgrades. It's a fast-paced game where you shoot enemies, dodge projectiles, and explore.</p>
+            </div>
+        </li>
+
+        <!-- 18. Chrome Dino Game -->
+        <li class="game-card">
+            <a href="./Chrome Dino Game/index.html">
+                <img src="./Chrome Dino Game/preview.jpg">
+            </a>
+            <div class="description">
+                <strong>Chrome Dino Game</strong>
+                <p>The Chrome Dino Game (or T-Rex Runner) is a simple, endless runner game built into Google Chrome, appearing when you're offline to keep you entertained, featuring a pixelated T-Rex that jumps over cacti and ducks under pterodactyls as the speed and difficulty increase, becoming a beloved browser staple for its straightforward fun and history as a creative offline distraction.</p>
+            </div>
+        </li>
+    </ul>
+    <!-- New Footer Section with Image -->
+    <footer>
+        <img src="./evil footer.png" alt="my evil launcher">
+    </footer>
+</body>
+</html>
+
+
