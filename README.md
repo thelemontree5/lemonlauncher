@@ -19,3 +19,8 @@ Still, don't expect too much from me, or any "innovative" features to be added t
 ## <img src="https://github.com/user-attachments/assets/08e03bb5-e9fe-481f-ae73-97182681d814">
 
 There will be a discord soon!
+
+## <img src="https://github.com/user-attachments/assets/015ce5b2-1fd4-4895-8234-2b0f55dab018">
+
+files coming soon
+
