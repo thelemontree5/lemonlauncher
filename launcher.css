@@ -13,12 +13,12 @@
 body.light-mode {
     --bg-gif: url('./Other Assets/holy cow.jpg'); 
     --dock-bg: #87CEEB; 
-    --text-color: black;
+    --text-color: white;
     --main-color: #87CEEB;
-    --accent-color: white;
+    --accent-color: cyan;
     --font-family: "Charm", cursive; 
     --strong: #0056b3;
-    --p: #444;
+    --p: #cecece;
 }
 
 body {
@@ -80,6 +80,7 @@ ul {
 
 .description strong { color: var(--strong); display: block; margin-bottom: 5px; font-size: 18px; }
 .description p { margin: 0; font-size: 14px; color: var(--p); }
+.description p.button { background: #333; color: white; padding: 8px 16px; text-decoration: none; border-radius: 40px; border: 1px solid #444; }
 
 .game-card:hover { transform: translateY(-5px); z-index: 10; }
 body:not(.no-hover) 
