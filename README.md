@@ -22,5 +22,25 @@ There will be a discord soon!
 
 ## <img src="https://github.com/user-attachments/assets/015ce5b2-1fd4-4895-8234-2b0f55dab018">
 
-files coming soon
+<div>
+baldi's basics classic remastered - Ported by koi/_flixel <div>
+baldi's basics plus - Ported by koi/_flixel <div>
+bendy and the ink machine - Ported by 98corbins <div>
+buckshot roulette - Ported by breadbb <div>
+deltarune - Ported by .shortpie. <div>
+five nights at freddy's 1 - Ported by irv77 <div>
+five nights at freddy's 2 - Ported by irv77 <div>
+five nights at freddy's 3 - Ported by irv77 <div>
+five nights at freddy's 4 - Ported by irv77 <div>
+five nights at freddy's pizzeria simulator - Ported by irv77 and breadbb <div>
+five nights at freddy's sister location - Ported by irv77 and breadbb <div>
+five nights at freddy's ultimate custom night - Ported by irv77 <div>
+five nights at freddy's world - Ported by irv77 <div>
+getting over it - Ported by slqnt <div>
+pizza tower - Ported by burnedpopcorn <div>
+slime ranchers - Ported by snubby <div>
+super mario 64 - Ported by snubby <div>
+ultrakill prelude - Ported by Cake Logic | Made by Arsi Patala <div>
+undertale yellow - by .shortpie. | Made by Team Undertale Yellow <div>
+undertale - Ported by .shortpie. | Made by Toby Fox <div>
 
