@@ -1,7 +1,7 @@
-# IF UR GAME OR YOUR PORT IS ON HERE, PLEASE READ THIS:
+# IF YOUR GAME OR YOUR PORT IS ON HERE, PLEASE READ THIS:
 ***NONE*** of the games here are my work; credits for the creators of these ports are both in the launcher itself and listed at the bottom of this. I am not affiliated with any of the creators of these games, nor any companies that own said games. If you would like your game taken off of this launcher or more credit to be shown to identify you, please get in contact with me through Discord at _lemon (thelemonadestand)_ or through email, which will be attached in my profile eventually! thank you, and have a nice day!
 
-# <img width="715" height="105" alt="evil footer" src="https://github.com/user-attachments/assets/420ac0d9-008c-42e5-b100-713088c78649">
+## <img width="715" height="105" alt="evil footer" src="https://github.com/user-attachments/assets/420ac0d9-008c-42e5-b100-713088c78649">
 My very own, homemade, free-range, **EVIL** game launcher! These games are usually not going to be the latest version of the game you hope to play whatsoever, but the majority of these work offline and can be run straight from your browser (or files if needed)! I'll try to update the launcher with new games every week at random, so be sure to check back on this now and again to check for updates and releases.
 
 <img width="1353" height="647" alt="Screenshot 2026-01-07 2 45 48 PM" src="https://github.com/user-attachments/assets/1ac6a2ac-7486-4bec-8034-49210080cc8e" />
