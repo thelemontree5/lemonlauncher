@@ -1,12 +1,13 @@
 :root {
     --bg-gif: url('./its all on fire.gif');
     --dock-bg: red;
-    --text-color: white;
+    --text-color: black;
     --main-color: red;
     --accent-color: darkred;
     --font-family: "Comic Sans MS", sans-serif;
     --strong: red;
     --p: orange;
+    --version-button: #333;
     --grid-cols: 3;
 }
 
@@ -19,6 +20,7 @@ body.light-mode {
     --font-family: "Charm", cursive; 
     --strong: #0056b3;
     --p: #cecece;
+    --version-button: #cdcdcd;
 }
 
 body {
@@ -80,7 +82,15 @@ ul {
 
 .description strong { color: var(--strong); display: block; margin-bottom: 5px; font-size: 18px; }
 .description p { margin: 0; font-size: 14px; color: var(--p); }
-.description p.button { background: #333; color: white; padding: 8px 16px; text-decoration: none; border-radius: 40px; border: 1px solid #444; }
+
+.versionbutton { 
+    background: var(--version-button); 
+    color: var(--text-color); 
+    padding: 8px 16px; 
+    text-decoration: none; 
+    border-radius: 40px; 
+    border: 1px solid var(--version-button); 
+}
 
 .game-card:hover { transform: translateY(-5px); z-index: 10; }
 body:not(.no-hover) 
