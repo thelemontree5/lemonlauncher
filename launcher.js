@@ -100,3 +100,11 @@ function updateTheme() {
 function updateHover() {
     document.body.classList.toggle('no-hover', document.getElementById('hoverToggle').checked);
 }
+
+window.addEventListener('beforeunload', function (e) {
+  // Cancel the event
+  e.preventDefault();
+  // Chrome requires returnValue to be set
+  e.returnValue = '';
+});
+
