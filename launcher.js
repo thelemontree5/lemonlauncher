@@ -98,11 +98,74 @@ function updateTheme() {
 }
 
 function updateHover() {
-    document.body.classList.toggle('no-hover', document.getElementById('hoverToggle').checked);
+    const isChecked = document.getElementById('hoverToggle').checked;
+    document.body.classList.toggle('no-hover', isChecked);
+    localStorage.setItem('hoverDisabled', isChecked);
+
+    document.querySelectorAll('.temp-version-card').forEach(card => card.remove());
+
+    if (isChecked) {
+        generateVersionCards();
+
+        if (typeof filterGames === 'function') {
+            filterGames();
+        }
+    }
 }
 
-window.addEventListener('beforeunload', function (e) {
-  e.preventDefault();
-  e.returnValue = 'yo gang something tried to close ur tab, click cancel if it wasnt you';
-});
+function generateVersionCards() {
+    document.querySelectorAll('.temp-version-card').forEach(card => card.remove());
 
+
+    const cardsWithVersions = document.querySelectorAll('.game-card .version-btn');
+    cardsWithVersions.forEach(btnContainer => {
+        const parentCard = btnContainer.closest('.game-card');
+        const links = btnContainer.querySelectorAll('a');
+        const originalImg = parentCard.querySelector('img').src;
+
+        const fallbackImg = parentCard.querySelector('img').getAttribute('src');
+        
+        links.forEach(link => {
+            if (link.textContent.toLowerCase().includes("original")) return;
+
+            const tempCard = document.createElement('li');
+            tempCard.className = 'game-card temp-version-card';
+            
+            const versionImg = link.getAttribute('data-img') || fallbackImg;
+            tempCard.setAttribute('data-title', link.textContent.toLowerCase());
+            
+            tempCard.innerHTML = `
+                <a href="${link.href}">
+                    <img src="${versionImg}">
+                </a>
+                <div class="version-label">${link.textContent}</div>
+            `;
+            
+            parentCard.after(tempCard); 
+        });
+    });
+}
+
+window.onload = function() {
+    const container = document.querySelector('ul');
+    if (container) {
+        originalOrder = Array.from(container.querySelectorAll('.game-card'));
+    }
+
+    const hoverSetting = localStorage.getItem('hoverDisabled') === 'true';
+    const hoverToggle = document.getElementById('hoverToggle');
+    if (hoverToggle) {
+        hoverToggle.checked = hoverSetting;
+        document.body.classList.toggle('no-hover', hoverSetting);
+
+        if (hoverSetting) {
+            generateVersionCards();
+        }
+    }
+};
+
+
+window.addEventListener('beforeunload', (event) => {
+    event.preventDefault();
+    event.returnValue = ''; 
+});
