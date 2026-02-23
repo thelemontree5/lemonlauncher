@@ -1,0 +1,40 @@
+<html lang="en-us">
+    <head>
+        <base href="https://cdn.jsdelivr.net/gh/genizy/google-class/slope/">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/genizy/google-class/slope/TemplateData/style.css"/>
+        <script src="https://cdn.jsdelivr.net/gh/genizy/google-class/slope/TemplateData/UnityProgress.js"></script>
+        <script src="https://cdn.jsdelivr.net/gh/genizy/google-class/slope/TemplateData/unityloader41.js"></script>
+        <style>
+            body {
+                margin: 0;
+                overflow: hidden;
+                background: rgb(35, 31, 32);
+            }
+            #gameContainer {
+                width: 100%;
+                height: 100vh;
+                position: relative;
+            }
+        </style>
+        <script>
+            var gameInstance;
+            window.onload = function () {
+                gameInstance = UnityLoader.instantiate(
+                    "gameContainer",
+                    "https://cdn.jsdelivr.net/gh/genizy/google-class/slope/Build/slope.json",
+                    {
+                        onProgress: UnityProgress,
+                        Module: {
+                            onRuntimeInitialized: function () {
+                                UnityProgress(gameInstance, "complete");
+                            }
+                        }
+                    }
+                );
+            };
+        </script>
+    </head>
+    <body>
+        <div id="gameContainer"></div>
+    </body>
+</html>
