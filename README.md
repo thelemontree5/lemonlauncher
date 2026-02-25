@@ -49,8 +49,8 @@ eaglercraft 1.12.2 - Ported by PeytonPlayz585 | Made by Mojang <div>
 celeste - Ported by MercuryWorkshop | Made by Maddy Makes Games and Extremely OK Games, Ltd. <div>
 plants versus zombies - Modded version ported by ROBlNET13 | Made by LonelyStar and JiangNan Game Development <div>
 slope 3D - Ported by ??? | Made by Rob Kay and developed by Y8 Games <div>
-DOOM 1 - Ported by diekmann | Made by id Software <div>
+The Ultimate DOOM - Ported by diekmann | Made by id Software <div>
 DOOM 2 - Ported by diekmann(?) | Made by id Software <div>
 cookie clicker - Made by Julien "Orteil" Thiennot <div>
 chrome dinosaur game - Made by Google <div>
-
+world's hardest game 1 & 2 - Made by Stephen Critoph <div>
