@@ -2,6 +2,7 @@
     --bg-gif: url('./its all on fire.gif');
     --dock-bg: red;
     --text-color: black;
+    --alt-text-color: white;
     --main-color: red;
     --accent-color: darkred;
     --font-family: "Comic Sans MS", sans-serif;
@@ -15,6 +16,7 @@ body.light-mode {
     --bg-gif: url('./Other Assets/holy cow.jpg'); 
     --dock-bg: #87CEEB; 
     --text-color: white;
+    --alt-text-color: black;
     --main-color: #87CEEB;
     --accent-color: cyan;
     --font-family: "Charm", cursive; 
@@ -82,6 +84,7 @@ ul {
 
 .description strong { color: var(--strong); display: block; margin-bottom: 5px; font-size: 18px; }
 .description p { margin: 0; font-size: 14px; color: var(--p); }
+.description h1 { margin: 0; font-size: 21px; color: var(--alt-text-color); }
 
 .game-card:hover { transform: translateY(-5px); z-index: 10; }
 body:not(.no-hover) 
@@ -121,7 +124,7 @@ body:not(.no-hover)
 
 #gameSearch {
     flex: 1; padding: 14px 30px; border-radius: 40px; border: 2px solid #333;
-    font-size: 16px; outline: none; background: white; color: black;
+    font-size: 16px; outline: none; background: white; color: var(--accent-color);
 }
 
 .toggle-btn {
@@ -175,8 +178,8 @@ body.no-hover .description {
     position: relative; 
     width: 419px; 
     height: 192px; 
-    border: none !important;
-    background: transparent;
+    z-index: 1; 
+    transition: transform 0.3s;
 }
 
 .temp-version-card img {
@@ -185,7 +188,6 @@ body.no-hover .description {
     height: 100%; 
     border-radius: 8px; 
     border: 7.5px solid var(--accent-color); 
-    box-sizing: border-box;
 }
 
 .version-label {
@@ -205,8 +207,7 @@ body.no-hover .description {
 }
 
 body.no-hover .game-card { 
-    height: 192px; 
-    margin-bottom: 5px;
+    height: 192px;
 }
 
 .version-btn a {
