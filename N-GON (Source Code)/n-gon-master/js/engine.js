@@ -14,15 +14,86 @@ const Engine = Matter.Engine,
 // create an engine
 const engine = Engine.create();
 engine.world.gravity.scale = 0; //turn off gravity (it's added back in later)
-// engine.velocityIterations = 100
-// engine.positionIterations = 100
 // engine.enableSleeping = true
+
+//to reduce lag, maybe
+engine.constraintIterations = 1; //default is 2
+// engine.positionIterations = 4; //default is 6
+// engine.velocityIterations = 2; //default is 4
+
+
+
+
+
+
+const removalQueue = [];
+function queueRemoval(type, index) {  //queueRemoval('body', i)
+    // Avoid duplicate entries
+    if (!removalQueue.some(r => r.type === type && r.index === index)) {
+        removalQueue.push({ type, index });
+    }
+}
+
+Events.on(engine, 'afterUpdate', () => {
+    const types = ['map', 'body', 'mob', 'powerUp', 'bullet']; //, 'cons', 'consBB'
+
+    // Grouped by type, sort each group descending so splices don't shift indices
+    types.forEach(type => {
+        const entries = removalQueue
+            .filter(r => r.type === type)
+            .map(r => r.index)
+            .sort((a, b) => b - a);
+
+        entries.forEach(i => {
+            switch (type) {
+                case 'bullet':
+                    Matter.Composite.remove(engine.world, bullet[i]);
+                    bullet.splice(i, 1);
+                    break;
+                case 'body':
+                    Matter.Composite.remove(engine.world, body[i]);
+                    body.splice(i, 1);
+                    break;
+                case 'mob':
+                    Matter.Composite.remove(engine.world, mob[i]);
+                    mob.splice(i, 1);
+                    break;
+                case 'powerUp':
+                    Matter.Composite.remove(engine.world, powerUp[i]);
+                    powerUp.splice(i, 1);
+                    break;
+                case 'map':
+                    Matter.Composite.remove(engine.world, map[i]);
+                    map.splice(i, 1);
+                    break;
+                // case 'cons':
+                //     Matter.Composite.remove(engine.world, cons[i]);
+                //     cons.splice(i, 1);
+                //     break;
+                // case 'consBB':
+                //     Matter.Composite.remove(engine.world, consBB[i]);
+                //     consBB.splice(i, 1);
+                //     break;
+            }
+        });
+    });
+
+    removalQueue.length = 0;
+});
+
+
+
+
+
+
+
 
 // matter events
 function playerOnGroundCheck(event) {
     //runs on collisions events
     function enter() {
         m.numTouching++;
+        // m.groundCount++
         if (!m.onGround) {
             m.onGround = true;
             if (m.crouch) {
@@ -36,7 +107,7 @@ function playerOnGroundCheck(event) {
                 //crouch is forced in groundControl below
 
                 const momentum = player.velocity.y * player.mass //player mass is 5 so this triggers at 26 down velocity, unless the player is holding something
-                if (momentum > m.hardLanding) { //&& !input.up
+                if (momentum > m.hardLanding && !(input.up && Math.abs(player.velocity.x) > 7.5)) { //&& !input.up
                     m.doCrouch();
                     m.yOff = m.yOffWhen.jump;
                     m.hardLandCD = m.cycle + m.hardLandCDScale * Math.min(momentum / 6.5 - 6, 40)
@@ -47,7 +118,7 @@ function playerOnGroundCheck(event) {
                 //falling damage
                 if (tech.isFallingDamage && m.immuneCycle < m.cycle && momentum > 150) {
                     // m.takeDamage(Math.min(Math.sqrt(momentum - 100) * 0.02, 0.4) * spawn.dmgToPlayerByLevelsCleared());
-                    m.takeDamage(Math.min(Math.sqrt(momentum - 100) * 0.03, 0.6));
+                    m.takeDamage(Math.min(Math.sqrt(momentum - 100) * 0.04, 0.8));
                     // m.takeDamage(20);
                     if (m.immuneCycle < m.cycle + m.collisionImmuneCycles) m.immuneCycle = m.cycle + m.collisionImmuneCycles; //player is immune to damage for 30 cycles
                 }
@@ -55,16 +126,18 @@ function playerOnGroundCheck(event) {
         }
     }
 
-    const pairs = event.pairs;
-    for (let i = 0, j = pairs.length; i != j; ++i) {
-        let pair = pairs[i];
-        if (pair.bodyA === jumpSensor) {
-            m.standingOn = pair.bodyB; //keeping track to correctly provide recoil on jump
-            if (m.standingOn.alive !== true || m.immuneCycle > m.cycle) enter();
-        } else if (pair.bodyB === jumpSensor) {
-            m.standingOn = pair.bodyA; //keeping track to correctly provide recoil on jump
+
+    for (let i = 0, j = event.pairs.length; i != j; ++i) {
+        if (event.pairs[i].bodyA === jumpSensor) {
+            m.standingOn = event.pairs[i].bodyB; //keeping track to correctly provide recoil on jump
             if (m.standingOn.alive !== true || m.immuneCycle > m.cycle) enter();
         }
+
+        //doesn't seem to need to check bodyB (this might be because the player is added so it's earlier in array?)
+        // else if (event.pairs[i].bodyB === jumpSensor) {
+        //     m.standingOn = event.pairs[i].bodyA; //keeping track to correctly provide recoil on jump
+        //     if (m.standingOn.alive !== true || m.immuneCycle > m.cycle) enter();
+        // }
     }
     m.numTouching = 0;
 }
@@ -73,9 +146,10 @@ function playerOffGroundCheck(event) {
     //runs on collisions events
     const pairs = event.pairs;
     for (let i = 0, j = pairs.length; i != j; ++i) {
-        if (pairs[i].bodyA === jumpSensor || pairs[i].bodyB === jumpSensor) {
+        if (pairs[i].bodyA === jumpSensor) { //|| pairs[i].bodyB === jumpSensor) {
             if (m.onGround && m.numTouching === 0) {
                 m.onGround = false;
+                // m.groundCount = 0
                 m.lastOnGroundCycle = m.cycle;
                 m.hardLandCD = 0 // disable hard landing
                 if (m.checkHeadClear()) {
@@ -230,21 +304,21 @@ function collisionChecks(event) {
                         if (obj.classType === "body" && obj.speed > 9) {
                             const v = Vector.magnitude(Vector.sub(mob[k].velocity, obj.velocity));
                             if (v > 11) {
-                                if (tech.blockDmg) { //electricity
-                                    Matter.Body.setVelocity(mob[k], { x: 0.5 * mob[k].velocity.x, y: 0.5 * mob[k].velocity.y });
-                                    if (tech.isBlockRadiation && !mob[k].isShielded && !mob[k].isMobBullet) {
-                                        mobs.statusDoT(mob[k], tech.blockDmg * 0.42, 180) //200% increase -> x (1+2) //over 7s -> 360/30 = 12 half seconds -> 3/12
-                                    } else {
-                                        mob[k].damage(tech.blockDmg)
-                                        simulation.drawList.push({
-                                            x: pairs[i].activeContacts[0].vertex.x,
-                                            y: pairs[i].activeContacts[0].vertex.y,
-                                            radius: 28 * mob[k].damageReduction + 3,
-                                            color: "rgba(255,0,255,0.8)",
-                                            time: 4
-                                        });
-                                    }
-                                }
+                                // if (tech.deflectDmg) { //electricity
+                                //     Matter.Body.setVelocity(mob[k], { x: 0.5 * mob[k].velocity.x, y: 0.5 * mob[k].velocity.y });
+                                //     if (tech.isBlockRadiation && !mob[k].isShielded && !mob[k].isMobBullet) {
+                                //         mobs.statusDoT(mob[k], tech.deflectDmg * 0.42, 180) //200% increase -> x (1+2) //over 7s -> 360/30 = 12 half seconds -> 3/12
+                                //     } else {
+                                //         mob[k].damage(tech.deflectDmg)
+                                //         simulation.drawList.push({
+                                //             x: pairs[i].activeContacts[0].vertex.x,
+                                //             y: pairs[i].activeContacts[0].vertex.y,
+                                //             radius: 28 * mob[k].damageReduction + 3,
+                                //             color: "rgba(255,0,255,0.8)",
+                                //             time: 4
+                                //         });
+                                //     }
+                                // }
 
                                 let dmg = tech.blockDamage * v * obj.mass * (tech.isMobBlockFling ? 2.5 : 1) * (tech.isBlockRestitution ? 2.5 : 1) * ((m.fieldMode === 0 || m.fieldMode === 8) ? 1 + 0.05 * m.coupling : 1);
                                 if (mob[k].isShielded) dmg *= 0.7
@@ -281,11 +355,25 @@ function collisionChecks(event) {
     }
 }
 
-//determine if player is on the ground
+
 Events.on(engine, "collisionStart", function (event) {
     playerOnGroundCheck(event);
     // playerHeadCheck(event);
     collisionChecks(event);
+
+
+    // //do we need to also check bodyB
+    // for (let i = 0, j = event.pairs.length; i != j; ++i) {
+    //     if (event.pairs[i].bodyA === jumpSensor) {
+    //         player.collision.isJump = true
+    //     } else if (event.pairs[i].bodyA === playerBody) {
+    //         player.collision.isBody = true
+    //     } else if (event.pairs[i].bodyA === playerHead) {
+    //         player.collision.isHead = true
+    //     } else if (event.pairs[i].bodyA === headSensor) {
+    //         player.collision.isHeadSensor = true
+    //     }
+    // }
 });
 Events.on(engine, "collisionActive", function (event) {
     playerOnGroundCheck(event);
@@ -293,4 +381,16 @@ Events.on(engine, "collisionActive", function (event) {
 });
 Events.on(engine, "collisionEnd", function (event) {
     playerOffGroundCheck(event);
+
+    // for (let i = 0, j = event.pairs.length; i != j; ++i) {
+    //     if (event.pairs[i].bodyA === jumpSensor) {
+    //         player.collision.isJump = false
+    //     } else if (event.pairs[i].bodyA === playerBody) {
+    //         player.collision.isBody = false
+    //     } else if (event.pairs[i].bodyA === playerHead) {
+    //         player.collision.isHead = false
+    //     } else if (event.pairs[i].bodyA === headSensor) {
+    //         player.collision.isHeadSensor = false
+    //     }
+    // }
 });
