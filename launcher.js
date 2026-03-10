@@ -109,7 +109,7 @@ function updateHover() {
 
         if (typeof filterGames === 'function') {
             filterGames();
-            
+
         }
     }
 }
@@ -129,10 +129,10 @@ function generateVersionCards() {
 
             const tempCard = document.createElement('li');
             tempCard.className = 'game-card temp-version-card';
+            tempCard.className("data-date") = parentCard.getAttribute('data-date');
             
             const versionImg = link.getAttribute('data-img') || fallbackImg;
             tempCard.setAttribute('data-title', link.textContent.toLowerCase());
-            tempCard.className("data-date") = parentCard.getAttribute('data-date');
 
             tempCard.innerHTML = `
                 <a href="${link.href}">
