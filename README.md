@@ -54,3 +54,4 @@ DOOM 2 - Ported by diekmann(?) | Made by id Software <div>
 cookie clicker - Made by Julien "Orteil" Thiennot <div>
 chrome dinosaur game - Made by Google <div>
 world's hardest game 1 & 2 - Made by Stephen Critoph <div>
+happy wheels - Made by Jim Bonacci <div>

@@ -109,7 +109,6 @@ function updateHover() {
 
         if (typeof filterGames === 'function') {
             filterGames();
-            generateVersionCards();
         }
     }
 }
@@ -117,11 +116,13 @@ function updateHover() {
 function generateVersionCards() {
     document.querySelectorAll('.temp-version-card').forEach(card => card.remove());
 
+
     const cardsWithVersions = document.querySelectorAll('.game-card .version-btn');
     cardsWithVersions.forEach(btnContainer => {
         const parentCard = btnContainer.closest('.game-card');
         const links = btnContainer.querySelectorAll('a');
         const originalImg = parentCard.querySelector('img').src;
+
         const fallbackImg = parentCard.querySelector('img').getAttribute('src');
         
         links.forEach(link => {
@@ -129,7 +130,6 @@ function generateVersionCards() {
 
             const tempCard = document.createElement('li');
             tempCard.className = 'game-card temp-version-card';
-            tempCard.className("data-date") = parentCard.getAttribute('data-date');
             
             const versionImg = link.getAttribute('data-img') || fallbackImg;
             tempCard.setAttribute('data-title', link.textContent.toLowerCase());
@@ -163,6 +163,7 @@ window.onload = function() {
         }
     }
 };
+
 
 window.addEventListener('beforeunload', (event) => {
     event.preventDefault();
