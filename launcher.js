@@ -18,8 +18,10 @@ window.onload = function() {
     if (lightToggle) {
         lightToggle.isLight = lightSetting;
         document.body.classList.toggle('light-mode', lightSetting);
-        if (lightSetting) generateVersionCards();
+        if (lightSetting) updateTheme();
     }
+
+    addTagButtons();
 };
 
 function filterGames() {
@@ -156,5 +158,31 @@ function generateVersionCards() {
             
             parentCard.parentNode.insertBefore(tempCard, parentCard.nextSibling);
         });
+    });
+}
+
+function addTagButtons() {
+    const cards = document.querySelectorAll('.game-card');
+    cards.forEach(card => {
+        const tags = card.getAttribute('data-tags');
+        if (tags) {
+            const tagArray = tags.split(',').map(t => t.trim());
+            const desc = card.querySelector('.description');
+            const tagContainer = document.createElement('div');
+            tagContainer.className = 'tag-container';
+            tagArray.forEach(tag => {
+                const btn = document.createElement('button');
+                btn.className = 'tag-btn';
+                btn.textContent = tag;
+                btn.onclick = () => {
+                    const searchInput = document.getElementById('gameSearch');
+                    searchInput.value = '#' + tag;
+                    filterGames();
+                    searchInput.focus();
+                };
+                tagContainer.appendChild(btn);
+            });
+            desc.appendChild(tagContainer);
+        }
     });
 }
