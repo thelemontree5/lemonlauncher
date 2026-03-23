@@ -6,14 +6,8 @@ body {
     background-size: cover;     
     font-family: 'Charm', cursive;
     color: white;
-	height: 1000px;
+	height: 1500px;
     min-height: 100vh;
-}
-
-html, body {
-    margin: 0;
-    padding: 0;
-    height: 100%; 
 }
 
 .description {
