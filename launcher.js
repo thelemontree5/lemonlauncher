@@ -113,7 +113,7 @@ function toggleSettings() {
 function updateTheme() {
     const isLight = document.getElementById('themeToggle').checked;
     document.body.classList.toggle('light-mode', isLight);
-    document.title = isLight ? "Lemon's Experimental Kind Game Launcher" : "Lemon's Experimental Evil Game Launcher"; 
+    document.title = isLight ? "Lemon's Kind Game Launcher" : "Lemon's Evil Game Launcher"; 
 
     const logo = document.getElementById('dockLogo');
     if (logo) logo.src = isLight ? './Other Assets/holy footer.png' : './neutral footer.png';
